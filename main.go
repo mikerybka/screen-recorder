@@ -21,7 +21,7 @@ func main() {
 
 func recordUntilHourTick() error {
 	now := time.Now()
-	outfile := fmt.Sprintf("/home/mike/screen-recordings/%04d-%02d-%02d/%d.mkv", now.Year(), now.Month(), now.Day(), now.Hour())
+	outfile := fmt.Sprintf("/home/mike/screen-recordings/%04d-%02d-%02d/%02d.mkv", now.Year(), now.Month(), now.Day(), now.Hour())
 	err := os.MkdirAll(filepath.Dir(outfile), os.ModePerm)
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func recordUntilHourTick() error {
 		"-framerate", "30",
 		"-f", "x11grab",
 		"-i", ":0.0",
-		"-d", strconv.Itoa(d),
+		"-t", strconv.Itoa(d),
 		"-y",
 		outfile)
 	cmd.Stdout = os.Stdout
